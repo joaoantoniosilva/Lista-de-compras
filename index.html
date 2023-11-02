@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Compras</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      text-align: center; /* Centraliza o conteúdo no container */
+    }
+
+    h1 {
+      margin: 0; /* Remova a margem superior padrão do h1 */
+    }
+
+    .shopping-list ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .shopping-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #fff;
+    }
+
+    .add-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    button {
+      padding: 10px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Lista de Compras</h1>
+    <div class="shopping-list">
+      <ul id="shopping-list"></ul>
+    </div>
+    <div class="add-item">
+      <input type="text" id="item-name" placeholder="Nome do Item" />
+      <input type="number" id="item-quantity" placeholder="Quantidade" />
+      <button id="add-button">Adicionar</button>
+    </div>
+  </div>
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const shoppingList = document.getElementById('shopping-list');
+      const itemNameInput = document.getElementById('item-name');
+      const itemQuantityInput = document.getElementById('item-quantity');
+      const addButton = document.getElementById('add-button');
+
+      addButton.addEventListener('click', () => {
+        const name = itemNameInput.value;
+        const quantity = itemQuantityInput.value;
+
+        if (name && quantity) {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `<span>${name} - Quantidade: ${quantity}</span> <button class="remove-button">Remover</button>`;
+          shoppingList.appendChild(listItem);
+
+          itemNameInput.value = '';
+          itemQuantityInput.value = '';
+
+          listItem.querySelector('.remove-button').addEventListener('click', () => {
+            shoppingList.removeChild(listItem);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
